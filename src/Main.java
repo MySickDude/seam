@@ -1,6 +1,6 @@
 
 /**
- * @author Alexia Bogaert & Sacha Kozma
+ * @author Alexia BOGAERT & Sacha KOZMA
  */
 public final class Main {
 
