@@ -4,67 +4,94 @@
  */
 public final class Filter {
 
-    /**
-     * Get a pixel without accessing out of bounds
-     * @param gray a HxW float array
-     * @param row Y coordinate
-     * @param col X coordinate
-     * @return nearest valid pixel color
-     */
-    public static float at(float[][] gray, int row, int col) {
-        // TODO at
-        return 0.0f;
-    }
+	/**
+	 * Get a pixel without accessing out of bounds
+	 * @param gray a HxW float array
+	 * @param row Y coordinate
+	 * @param col X coordinate
+	 * @return nearest valid pixel color
+	 */
+	public static float at(float[][] gray, int row, int col) {
+		if (row < 0) {
+			row = 0;
+		} else if (row > (gray.length -1 )){
+			row = (gray.length - 1);
+		}
 
-    /**
-     * Convolve a single-channel image with specified kernel.
-     * @param gray a HxW float array
-     * @param kernel a MxN float array, with M and N odd
-     * @return a HxW float array
-     */
-    public static float[][] filter(float[][] gray, float[][] kernel) {
-        // TODO filter
-        return null;
-    }
+		if (col < 0){
+			col = 0;
+		} else if (col > (gray[0].length - 1)) {
+			col = (gray[0].length - 1);
+		}
+		return gray[row][col];
+	}
 
-    /**
-     * Smooth a single-channel image
-     * @param gray a HxW float array
-     * @return a HxW float array
-     */
-    public static float[][] smooth(float[][] gray) {
-        // TODO smooth
-        return null;
-    }
+	/**
+	 * Convolve a single-channel image with specified kernel.
+	 * @param gray a HxW float array
+	 * @param kernel a MxN float array, with M and N odd
+	 * @return a HxW float array
+	 */
+	public static float[][] filter(float[][] gray, float[][] kernel) {
+		float[][] filtered = new float [gray.length][gray[0].length];
 
-    /**
-     * Compute horizontal Sobel filter
-     * @param gray a HxW float array
-     * @return a HxW float array
-     */
-    public static float[][] sobelX(float[][] gray) {
-        // TODO sobelX
-        return null;
-    }
+		for (int i = 0; i < filtered.length; i++) {
+			for (int j = 0; j < filtered[0].length; j++) {
 
-    /**
-     * Compute vertical Sobel filter
-     * @param gray a HxW float array
-     * @return a HxW float array
-     */
-    public static float[][] sobelY(float[][] gray) {
-        // TODO sobelY
-        return null;
-    }
 
-    /**
-     * Compute the magnitude of combined Sobel filters
-     * @param gray a HxW float array
-     * @return a HxW float array
-     */
-    public static float[][] sobel(float[][] gray) {
-        // TODO sobel
-        return null;
-    }
+				for (int p = i - (kernel.length / 2), q = 0; p < i + (kernel.length / 2); p++, q++) {
+					for (int r = j - (kernel.length / 2), s = 0; r < j + (kernel.length / 2); r++, s++) {
+
+						filtered[i][j] += at(gray,p,r) * kernel[q][s];
+
+					}
+				}
+
+
+			}
+		}
+
+		return filtered;
+	}
+
+	/**
+	 * Smooth a single-channel image
+	 * @param gray a HxW float array
+	 * @return a HxW float array
+	 */
+	public static float[][] smooth(float[][] gray) {
+		float[][] smooth = {{0.1f, 0.1f, 0.1f},{0.1f, 0.2f, 0.1f}, {0.1f,0.1f,0.1f}};
+		return filter(gray, smooth);
+	}
+
+	/**
+	 * Compute horizontal Sobel filter
+	 * @param gray a HxW float array
+	 * @return a HxW float array
+	 */
+	public static float[][] sobelX(float[][] gray) {
+		// TODO sobelX
+		return null;
+	}
+
+	/**
+	 * Compute vertical Sobel filter
+	 * @param gray a HxW float array
+	 * @return a HxW float array
+	 */
+	public static float[][] sobelY(float[][] gray) {
+		// TODO sobelY
+		return null;
+	}
+
+	/**
+	 * Compute the magnitude of combined Sobel filters
+	 * @param gray a HxW float array
+	 * @return a HxW float array
+	 */
+	public static float[][] sobel(float[][] gray) {
+		// TODO sobel
+		return null;
+	}
 
 }
