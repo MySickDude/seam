@@ -39,8 +39,8 @@ public final class Filter {
 			for (int j = 0; j < filtered[0].length; j++) {
 
 
-				for (int p = i - (kernel.length / 2), q = 0; p < i + (kernel.length / 2); p++, q++) {
-					for (int r = j - (kernel.length / 2), s = 0; r < j + (kernel.length / 2); r++, s++) {
+				for (int p = i - (kernel.length / 2), q = 0; q < kernel.length; p++, q++) {
+					for (int r = j - (kernel.length / 2), s = 0; s < kernel[0].length; r++, s++) {
 
 						filtered[i][j] += at(gray,p,r) * kernel[q][s];
 
@@ -70,8 +70,8 @@ public final class Filter {
 	 * @return a HxW float array
 	 */
 	public static float[][] sobelX(float[][] gray) {
-		// TODO sobelX
-		return null;
+		float[][] sobelX = {{-1.0f, 0.0f, 1.0f},{-2.0f, 0.0f, 2.0f}, {-1.0f,0f,1.0f}};
+		return filter(gray, sobelX);
 	}
 
 	/**

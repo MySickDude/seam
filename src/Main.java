@@ -19,13 +19,6 @@ public final class Main {
         // Smooth it
         System.out.println("Smooth image...");
         
-        float[][] test = {{1,2,3},{4,5,6},{7,8,9}};
-        
-        Utils.AfficheTableau((test));;
-
-        
-        Utils.AfficheTableau(Filter.smooth(test));;
-        
         float[][] smooth = Filter.smooth(gray);
         Helper.show(Color.toRGB(smooth), "Smooth");
 
