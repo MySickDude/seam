@@ -154,8 +154,14 @@ public final class Color {
 	 * @see #getGray
 	 */
 	public static float[][] toGray(int[][] image) {
-		// TODO toGray
-		return null;
+		float imageGray[][] = new float [image.length][image[0].length];
+
+		for (int i = 0; i < image.length; i++) {
+			for (int j = 0; j < image[0].length; j++) {
+				imageGray[i][j] = getGray(image[i][j]);
+			}
+		}
+		return imageGray;
 	}
 
 	/**
@@ -166,8 +172,14 @@ public final class Color {
 	 * @see #getRGB(float)
 	 */
 	public static int[][] toRGB(float[][] gray) {
-		// TODO toRGB
-		return null;
+		int imageRGB[][] = new int [gray.length][gray[0].length];
+
+		for (int i = 0; i < gray.length; i++) {
+			for (int j = 0; j < gray[0].length; j++) {
+				imageRGB[i][j] = getRGB(gray[i][j]);
+			}
+		}
+		return imageRGB;
 	}
 
 }
