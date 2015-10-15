@@ -69,7 +69,7 @@ public final class Color {
 		rgbSomme += getBlue(rgb);
 		rgbSomme += getGreen(rgb);
 
-		float rgbMoyenne = (float) (rgbSomme / 3.0);
+		float rgbMoyenne = (rgbSomme / 3.0f);
 
 
 		return rgbMoyenne;
@@ -107,13 +107,13 @@ public final class Color {
 		}
 
 		rgb = rgb << 8;
-		rgb += red*255.0f;
+		rgb += red*255;
 
 		rgb = rgb << 8;
-		rgb += green * 255.0f;
+		rgb += green * 255;
 
 		rgb = rgb << 8;
-		rgb += blue * 255.0f;
+		rgb += blue * 255;
 		return rgb;
 	}
 
@@ -127,21 +127,23 @@ public final class Color {
 	 */
 	public static int getRGB(float gray) {
 		int rgb = 0b00000000;
+		
 
 		if (gray < 0) {
 			gray = 0;
 		} else if (gray > 1){
 			gray = 1;
 		}
+		int grayInt = (int)(gray*255.0);
 
 		rgb = rgb << 8;
-		rgb += gray*255.0f;
+		rgb += grayInt;
 
 		rgb = rgb << 8;
-		rgb += gray * 255.0f;
+		rgb += grayInt;
 
 		rgb = rgb << 8;
-		rgb += gray * 255.0f;
+		rgb += grayInt;
 
 		return rgb;
 	}
