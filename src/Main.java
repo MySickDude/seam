@@ -8,7 +8,7 @@ public final class Main {
 
         // Load image
         System.out.println("Load image...");
-        int[][] image = Helper.read("tower.jpg");
+        int[][] image = Helper.read("americascup.jpg");
         Helper.show(image, "Original");
 
         // Convert to grayscale

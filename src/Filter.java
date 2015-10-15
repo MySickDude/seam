@@ -90,8 +90,19 @@ public final class Filter {
 	 * @return a HxW float array
 	 */
 	public static float[][] sobel(float[][] gray) {
-		// TODO sobel
-		return null;
+		float[][] sobel = new float [gray.length][gray[0].length];
+		float[][] sobelX = sobelX(gray);
+		float[][] sobelY = sobelY(gray);
+				
+		for (int i = 0; i < gray.length; i++) {
+			for (int j = 0; j < gray[0].length; j++) {
+				sobel[i][j] = (float)(Math.sqrt((sobelX[i][j] * sobelX[i][j]) + (sobelY[i][j]*sobelY[i][j])));
+			}
+		}
+
+	
+		
+		return sobel;
 	}
 
 }
