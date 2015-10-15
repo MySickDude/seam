@@ -88,23 +88,9 @@ public final class Color {
 	public static int getRGB(float red, float green, float blue) {
 		int rgb = 0b00000000;
 
-		if (red < 0) {
-			red = 0;
-		} else if (red > 1){
-			red = 1;
-		}
-
-		if (green < 0) {
-			green = 0;
-		} else if (green > 1){
-			green = 1;
-		}
-
-		if (blue < 0) {
-			blue = 0;
-		} else if (blue > 1){
-			blue = 1;
-		}
+		red = Utils.RoundToBorders(1, 0, red);
+		green = Utils.RoundToBorders(1, 0, green);
+		blue = Utils.RoundToBorders(1, 0, blue);
 
 		rgb = rgb << 8;
 		rgb += red*255;

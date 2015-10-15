@@ -12,4 +12,15 @@ public class Utils {
 
 
 	}
+	
+	public static float RoundToBorders (float max, float min, float valeur){
+		if (valeur < min) {
+			valeur = min;
+		} else if (valeur > max){
+			valeur = max;
+		}
+		
+		return valeur;
+	}
+	
 }
