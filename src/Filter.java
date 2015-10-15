@@ -80,8 +80,8 @@ public final class Filter {
 	 * @return a HxW float array
 	 */
 	public static float[][] sobelY(float[][] gray) {
-		// TODO sobelY
-		return null;
+		float[][] sobelY = {{-1.0f, -2.0f, -1.0f},{0.0f, 0.0f, 0.0f}, {1.0f,2.0f,1.0f}};
+		return filter(gray, sobelY);
 	}
 
 	/**
