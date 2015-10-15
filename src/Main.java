@@ -5,12 +5,12 @@
 public final class Main {
 
     public static void main(String[] args) {
-
+    	
         // Load image
         System.out.println("Load image...");
         int[][] image = Helper.read("doves.jpg");
         Helper.show(image, "Original");
-
+     
         // Convert to grayscale
         System.out.println("Convert to grayscale...");
         float[][] gray = Color.toGray(image);
