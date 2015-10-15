@@ -5,12 +5,12 @@
 public final class Main {
 
     public static void main(String[] args) {
-    	
+
         // Load image
         System.out.println("Load image...");
         int[][] image = Helper.read("cats.jpg");
         Helper.show(image, "Original");
-     
+
         // Convert to grayscale
         System.out.println("Convert to grayscale...");
         float[][] gray = Color.toGray(image);
@@ -20,12 +20,12 @@ public final class Main {
         System.out.println("Smooth image...");
         float[][] smooth = Filter.smooth(gray);
         Helper.show(Color.toRGB(smooth), "Smooth");
-        
+
         // Apply Sobel
         System.out.println("Compute Sobel filter...");
         float[][] sobel = Filter.sobel(smooth);
         Helper.show(Color.toRGB(sobel), "Sobel");
-        
+
         // Find best seam
         System.out.println("Find best seam...");
         int[] seam = Seam.find(sobel);
