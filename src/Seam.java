@@ -23,7 +23,7 @@ public final class Seam {
      * @return a sequence of x-coordinates (the y-coordinate is the index)
      */
     public static int[] find(float[][] energy) {
-    	int longueurTableau = energy.length + energy[0].length;
+    	int longueurTableau = energy.length * energy[0].length;
 
     	
         int[][] successors = new int [longueurTableau + 2][];
@@ -44,19 +44,18 @@ public final class Seam {
 			
 		}
         
-        for (int i = 0; i < (energy.length - 1); i++) {
+        for (int i = 0; i < (energy.length - 1) ; i++) {
 			for (int j = 0; j < energy[0].length; j++) {
-				successors[(i * energy[0].length) + 1] = new int[3];
 				
 				if (j == 0) {
 					successors[(i * energy[0].length) + j] = new int[] {((i+1) * energy[0].length) + j, ((i+1) * energy[0].length) + j + 1};
 				} else if (j == energy[0].length - 1) {
 					successors[(i * energy[0].length) + j] = new int[] {((i+1) * energy[0].length) + (j - 1), ((i+1) * energy[0].length) + j};
-				} else {
+				} else { 
 					successors[(i * energy[0].length) + j] = new int[] {((i+1) * energy[0].length) + (j - 1), ((i+1) * energy[0].length) + j,((i+1) * energy[0].length) + j + 1};
 				}
 				
-				costs[(i * energy[0].length) + j] = energy[i][j];
+				costs[(i * energy[0].length) + j] = energy[i][j]; // BUG
 			}
 		}
         System.out.println("Successors :");
