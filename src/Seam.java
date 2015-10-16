@@ -24,6 +24,7 @@ public final class Seam {
      */
     public static int[] find(float[][] energy) {
     	int longueurTableau = energy.length + energy[0].length;
+
     	
         int[][] successors = new int [longueurTableau + 2][];
         float[] costs = new float [longueurTableau + 2];
@@ -55,11 +56,21 @@ public final class Seam {
 					successors[(i * energy[0].length) + j] = new int[] {((i+1) * energy[0].length) + (j - 1), ((i+1) * energy[0].length) + j,((i+1) * energy[0].length) + j + 1};
 				}
 				
-				
+				costs[(i * energy[0].length) + j] = energy[i][j];
 			}
 		}
+        System.out.println("Successors :");
+        Utils.AfficheTableau(successors);
         
-        return null;
+        System.out.println();
+        System.out.println("Costs :");
+        Utils.AfficheTableau(costs);
+        
+        
+        
+        
+        
+        return path(successors, costs, longueurTableau, longueurTableau + 1);
     }
 
     /**
