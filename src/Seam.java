@@ -23,7 +23,42 @@ public final class Seam {
      * @return a sequence of x-coordinates (the y-coordinate is the index)
      */
     public static int[] find(float[][] energy) {
-        // TODO find
+    	int longueurTableau = energy.length + energy[0].length;
+    	
+        int[][] successors = new int [longueurTableau + 2][];
+        float[] costs = new float [longueurTableau + 2];
+        
+        successors[longueurTableau] = new int [energy[0].length];
+        for (int i = 0; i < energy[0].length; i++) {
+			successors[longueurTableau][i] = i + 1;
+		}
+        costs[longueurTableau] = 0;
+        
+        successors[longueurTableau + 1] = new int[] {};
+        costs[longueurTableau + 1] = 0;
+        
+        for (int i = 0; i < energy[0].length; i++) {
+			successors[longueurTableau - 1 - i] = new int[] {longueurTableau + 1};
+			
+			
+		}
+        
+        for (int i = 0; i < (energy.length - 1); i++) {
+			for (int j = 0; j < energy[0].length; j++) {
+				successors[(i * energy[0].length) + 1] = new int[3];
+				
+				if (j == 0) {
+					successors[(i * energy[0].length) + j] = new int[] {((i+1) * energy[0].length) + j, ((i+1) * energy[0].length) + j + 1};
+				} else if (j == energy[0].length - 1) {
+					successors[(i * energy[0].length) + j] = new int[] {((i+1) * energy[0].length) + (j - 1), ((i+1) * energy[0].length) + j};
+				} else {
+					successors[(i * energy[0].length) + j] = new int[] {((i+1) * energy[0].length) + (j - 1), ((i+1) * energy[0].length) + j,((i+1) * energy[0].length) + j + 1};
+				}
+				
+				
+			}
+		}
+        
         return null;
     }
 
