@@ -31,7 +31,7 @@ public final class Seam {
         
         successors[longueurTableau] = new int [energy[0].length];
         for (int i = 0; i < energy[0].length; i++) {
-			successors[longueurTableau][i] = i + 1;
+			successors[longueurTableau][i] = i;
 		}
         costs[longueurTableau] = 0;
         
@@ -55,20 +55,15 @@ public final class Seam {
 					successors[(i * energy[0].length) + j] = new int[] {((i+1) * energy[0].length) + (j - 1), ((i+1) * energy[0].length) + j,((i+1) * energy[0].length) + j + 1};
 				}
 				
-				costs[(i * energy[0].length) + j] = energy[i][j]; // BUG
 			}
 		}
-        System.out.println("Successors :");
-        Utils.AfficheTableau(successors);
         
-        System.out.println();
-        System.out.println("Costs :");
-        Utils.AfficheTableau(costs);
-        
-        
-        
-        
-        
+        for (int i = 0; i < energy.length; i++) {
+			for (int j = 0; j < energy[0].length; j++) {
+				costs[(i * energy[0].length) + j] = energy[i][j];
+			}
+		}
+
         return path(successors, costs, longueurTableau, longueurTableau + 1);
     }
 

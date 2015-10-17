@@ -26,7 +26,7 @@ public final class Main {
         float[][] sobel = Filter.sobel(smooth);
         // Helper.show(Color.toRGB(sobel), "Sobel");
         
-        sobel = new float[][] {{-1, -1, -1},{-2,-2,-2}, {-3, -3, -3}}; // Pour les tests !
+        // sobel = new float[][] {{-1, -1, -1, -1},{-2,-2,-2,-2}, {-3, -3, -3,-3}, {-4,-4,-4,-4}}; // Pour les tests !
         
         // Find best seam
         System.out.println("Find best seam...");
