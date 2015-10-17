@@ -1,6 +1,6 @@
 
 /**
- * @author John Doe
+ * @author Alexia BOGAERT & Sacha KOZMA
  */
 public final class Seam {
 
@@ -29,11 +29,15 @@ public final class Seam {
         int[][] successors = new int [longueurTableau + 2][];
         float[] costs = new float [longueurTableau + 2];
         
-        successors[longueurTableau] = new int [energy[0].length];
+        // Création du pixel "d'entrée"
+        
+        successors[longueurTableau] = new int [energy[0].length]; 
         for (int i = 0; i < energy[0].length; i++) {
 			successors[longueurTableau][i] = i;
 		}
         costs[longueurTableau] = 0;
+        
+        //Création du pixel "de fin"
         
         successors[longueurTableau + 1] = new int[] {};
         costs[longueurTableau + 1] = 0;
@@ -43,6 +47,8 @@ public final class Seam {
 			
 			
 		}
+        
+        // Création des successeurs des pixels restants
         
         for (int i = 0; i < (energy.length - 1) ; i++) {
 			for (int j = 0; j < energy[0].length; j++) {
@@ -57,6 +63,8 @@ public final class Seam {
 				
 			}
 		}
+        
+        // Création du tableau costs
         
         for (int i = 0; i < energy.length; i++) {
 			for (int j = 0; j < energy[0].length; j++) {

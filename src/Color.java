@@ -1,6 +1,6 @@
 
 /**
- * @author John Doe
+ * @author Alexia BOGAERT & Sacha KOZMA
  */
 public final class Color {
 
