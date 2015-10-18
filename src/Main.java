@@ -5,7 +5,7 @@
 public final class Main {
 
     public static void main(String[] args) {
-
+    
         // Load image
         System.out.println("Load image...");
         int[][] image = Helper.read("cats.jpg");
@@ -25,8 +25,8 @@ public final class Main {
         System.out.println("Compute Sobel filter...");
         float[][] sobel = Filter.sobel(smooth);
         // Helper.show(Color.toRGB(sobel), "Sobel");
-        
-        // sobel = new float[][] {{-1, -1, -1, -1},{-2,-2,-2,-2}, {-3, -3, -3,-3}, {-4,-4,-4,-4}}; // Pour les tests !
+     
+        sobel = new float[][] {{1, 2, 3, 4},{2,3,4,5}, {5, 4, 2,1}, {2,1,3,4}}; // Pour les tests !
         
         // Find best seam
         System.out.println("Find best seam...");
