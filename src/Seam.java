@@ -18,14 +18,13 @@ public final class Seam {
 		Integer[] meilleurPredecesseur = new Integer[nombreSommets];
 		boolean modified = true;
 		ArrayList<Integer> pathVertex = new ArrayList<Integer>();
-		Integer sommetTemporaire = to;
+		int sommetTemporaire = to;
 
 		// Initiatialisation des tableaux
 
 		for (int i = 0; i < nombreSommets; i++) {
 			distance[i] = Float.POSITIVE_INFINITY;
 			meilleurPredecesseur[i] = null;
-			pathVertex = null;
 		}
 
 		distance[from] = costs[from];
@@ -45,24 +44,27 @@ public final class Seam {
 
 		}
 
-		
-/*
 		for (int i = 0; i < to; i--) {
-			pathVertex.add(sommetTemporaire);
 
-			if (meilleurPredecesseur[sommetTemporaire] == to) {
+			if (meilleurPredecesseur[sommetTemporaire] == null) {
+				return null;
 				
-				System.out.println("C'est la fin  des haricots");
-				return null;
-			} else if (meilleurPredecesseur[sommetTemporaire] == null) {
-				return null;
+			} else if (meilleurPredecesseur[sommetTemporaire] == from) {
+				int[] pathVertexInt = new int[pathVertex.size()];
+				
+				for (int j = 0; j < (pathVertexInt.length); j++) {
+					pathVertexInt[j] = pathVertex.get(j); 
+				}
+				
+				return pathVertexInt;
+				
 			} else {
 				sommetTemporaire = meilleurPredecesseur[sommetTemporaire];
 			}
 			
-		}
+			pathVertex.add(0, sommetTemporaire);
 
-*/ // ---> Trouver un moyen de mettre les bestPredecessors dans un tableau, mais dans le bon ordre (ordre inverse)
+		}
 
 		return null;
 
@@ -126,19 +128,24 @@ public final class Seam {
 
 
 
-		int[] pathColonne = new int[energy[0].length];
 
 		if (path(successors, costs, longueurTableau, longueurTableau + 1) == null) {
 			System.out.println("No seam found...");
+			return null; 
+
 		} else {
 			int[] pathVertex = path(successors, costs, longueurTableau, longueurTableau + 1);
-			System.out.println(pathVertex.length + ", " + pathColonne.length);
-
-
+			
+			for (int i = 0; i < pathVertex.length; i++) {
+				pathVertex[i] = pathVertex[i] - (i * energy[0].length);
+			}
+			
+			Utils.AfficheTableau(pathVertex);
+			
+			return pathVertex;
 		}
 
 
-		return null;
 	}
 
 	/**

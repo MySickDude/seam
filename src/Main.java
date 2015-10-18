@@ -8,26 +8,24 @@ public final class Main {
     
         // Load image
         System.out.println("Load image...");
-        int[][] image = Helper.read("cats.jpg");
-        // Helper.show(image, "Original");
+        int[][] image = Helper.read("tower.jpg");
+        Helper.show(image, "Original");
     	
         // Convert to grayscale
         System.out.println("Convert to grayscale...");
         float[][] gray = Color.toGray(image);
-        // Helper.show(Color.toRGB(gray), "Grayscale");
+        Helper.show(Color.toRGB(gray), "Grayscale");
 
         // Smooth it
         System.out.println("Smooth image...");
         float[][] smooth = Filter.smooth(gray);
-        // Helper.show(Color.toRGB(smooth), "Smooth");
+        Helper.show(Color.toRGB(smooth), "Smooth");
 
         // Apply Sobel
         System.out.println("Compute Sobel filter...");
         float[][] sobel = Filter.sobel(smooth);
-        // Helper.show(Color.toRGB(sobel), "Sobel");
+        Helper.show(Color.toRGB(sobel), "Sobel");
      
-        sobel = new float[][] {{1, 2, 3, 4},{2,3,4,5}, {5, 4, 2,1}, {2,1,3,4}}; // Pour les tests !
-        
         // Find best seam
         System.out.println("Find best seam...");
         int[] seam = Seam.find(sobel);
