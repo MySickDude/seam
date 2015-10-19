@@ -13,29 +13,31 @@ public final class Seam {
 	 * @return a sequence of vertices, or {@code null} if no path exists
 	 */
 	public static int[] path(int[][] successors, float[] costs, int from, int to) {
-		int nombreSommets = successors.length;
-		float[] distance = new float[nombreSommets];
-		Integer[] meilleurPredecesseur = new Integer[nombreSommets];
+		int vertexNumber = successors.length;
+		float[] distance = new float[vertexNumber];
+		Integer[] bestPredecessor = new Integer[vertexNumber];
 		boolean modified = true;
 		ArrayList<Integer> pathVertex = new ArrayList<Integer>();
-		int sommetTemporaire = to;
+		int temporaryVertex = to;
 
 		// Initiatialisation des tableaux
 
-		for (int i = 0; i < nombreSommets; i++) {
+		for (int i = 0; i < vertexNumber; i++) {
 			distance[i] = Float.POSITIVE_INFINITY;
-			meilleurPredecesseur[i] = null;
+			bestPredecessor[i] = null;
 		}
+		
+		// Algorithme de Dijkstra
 
 		distance[from] = costs[from];
 
 		while (modified) {
 			modified = false;
-			for (int i = 0; i < nombreSommets; i++) { // ca merde ici ? pas sur
+			for (int i = 0; i < vertexNumber; i++) {
 				for (int j = 0; j < successors[i].length; j++) {
 					if (distance[successors[i][j]] > (distance[i] + costs[successors[i][j]])) {
 						distance[successors[i][j]] = (distance[i] + costs[successors[i][j]]);
-						meilleurPredecesseur[successors[i][j]] = i;
+						bestPredecessor[successors[i][j]] = i;
 						modified = true;
 					}
 				}
@@ -43,16 +45,18 @@ public final class Seam {
 
 
 		}
+		
+		// Parcours en sens inverse pour créer le chemin de from à to (inclus)
 
 		for (int i = 0; i < to; i--) {
 			
-			pathVertex.add(0, sommetTemporaire);
+			pathVertex.add(0, temporaryVertex);
 
 
-			if (meilleurPredecesseur[sommetTemporaire] == null) {
+			if (bestPredecessor[temporaryVertex] == null) {
 				return null;
 				
-			} else if (meilleurPredecesseur[sommetTemporaire] == from) {
+			} else if (bestPredecessor[temporaryVertex] == from) {
 				pathVertex.add(0, from);
 				
 				int[] pathVertexInt = new int[pathVertex.size()];
@@ -64,15 +68,13 @@ public final class Seam {
 				return pathVertexInt;
 				
 			} else {
-				sommetTemporaire = meilleurPredecesseur[sommetTemporaire];
+				temporaryVertex = bestPredecessor[temporaryVertex];
 			}
 			
 
 		}
-
+		
 		return null;
-
-
 	}
 
 	/**
@@ -81,27 +83,27 @@ public final class Seam {
 	 * @return a sequence of x-coordinates (the y-coordinate is the index)
 	 */
 	public static int[] find(float[][] energy) {
-		int longueurTableau = energy.length * energy[0].length;
+		int energySize = energy.length * energy[0].length;
 
 
-		int[][] successors = new int [longueurTableau + 2][];
-		float[] costs = new float [longueurTableau + 2];
+		int[][] successors = new int [energySize + 2][];
+		float[] costs = new float [energySize + 2];
 
 		// Création du pixel "d'entrée"
 
-		successors[longueurTableau] = new int [energy[0].length]; 
+		successors[energySize] = new int [energy[0].length]; 
 		for (int i = 0; i < energy[0].length; i++) {
-			successors[longueurTableau][i] = i;
+			successors[energySize][i] = i;
 		}
-		costs[longueurTableau] = 0;
+		costs[energySize] = 0;
 
 		//Création du pixel "de fin"
 
-		successors[longueurTableau + 1] = new int[] {};
-		costs[longueurTableau + 1] = 0;
+		successors[energySize + 1] = new int[] {};
+		costs[energySize + 1] = 0;
 
 		for (int i = 0; i < energy[0].length; i++) {
-			successors[longueurTableau - 1 - i] = new int[] {longueurTableau + 1};
+			successors[energySize - 1 - i] = new int[] {energySize + 1};
 
 
 		}
@@ -130,18 +132,19 @@ public final class Seam {
 			}
 		}
 
+		
+		// Recheche du chemin grâce à path()
 
 
-
-		if (path(successors, costs, longueurTableau, longueurTableau + 1) == null) {
+		if (path(successors, costs, energySize, energySize + 1) == null) {
 			System.out.println("No seam found...");
 			return null; 
 
 		} else {
-			int[] pathVertex = path(successors, costs, longueurTableau, longueurTableau + 1);
+			int[] pathVertex = path(successors, costs, energySize, energySize + 1);
 			
 			int[] pathVertexFinal = new int[pathVertex.length - 2]; 
-			for (int i = 1; i < pathVertex.length - 1; i++) {
+			for (int i = 1; i < pathVertex.length - 1; i++) { // Permet de créer un tableau du chemin sans le from et to
 				pathVertexFinal[i - 1] = pathVertex[i] - ((i - 1) * energy[0].length);
 			}
 			

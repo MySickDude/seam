@@ -64,12 +64,12 @@ public final class Color {
 	 * @see #getRGB(float)
 	 */
 	public static float getGray(int rgb) {
-		float rgbSomme = 0;
-		rgbSomme += getRed(rgb);
-		rgbSomme += getBlue(rgb);
-		rgbSomme += getGreen(rgb);
+		float rgbSum = 0;
+		rgbSum += getRed(rgb);
+		rgbSum += getBlue(rgb);
+		rgbSum += getGreen(rgb);
 
-		float rgbMoyenne = (rgbSomme / 3.0f);
+		float rgbMoyenne = (rgbSum / 3.0f);
 
 
 		return rgbMoyenne;
@@ -88,9 +88,9 @@ public final class Color {
 	public static int getRGB(float red, float green, float blue) {
 		int rgb = 0b00000000;
 
-		red = Utils.RoundToBorders(1, 0, red);
-		green = Utils.RoundToBorders(1, 0, green);
-		blue = Utils.RoundToBorders(1, 0, blue);
+		red = Utils.roundToLimits(1, 0, red);
+		green = Utils.roundToLimits(1, 0, green);
+		blue = Utils.roundToLimits(1, 0, blue);
 
 		rgb = rgb << 8;
 		rgb += red*255;
