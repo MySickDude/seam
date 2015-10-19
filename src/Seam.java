@@ -45,11 +45,16 @@ public final class Seam {
 		}
 
 		for (int i = 0; i < to; i--) {
+			
+			pathVertex.add(0, sommetTemporaire);
+
 
 			if (meilleurPredecesseur[sommetTemporaire] == null) {
 				return null;
 				
 			} else if (meilleurPredecesseur[sommetTemporaire] == from) {
+				pathVertex.add(0, from);
+				
 				int[] pathVertexInt = new int[pathVertex.size()];
 				
 				for (int j = 0; j < (pathVertexInt.length); j++) {
@@ -62,7 +67,6 @@ public final class Seam {
 				sommetTemporaire = meilleurPredecesseur[sommetTemporaire];
 			}
 			
-			pathVertex.add(0, sommetTemporaire);
 
 		}
 
@@ -136,13 +140,12 @@ public final class Seam {
 		} else {
 			int[] pathVertex = path(successors, costs, longueurTableau, longueurTableau + 1);
 			
-			for (int i = 0; i < pathVertex.length; i++) {
-				pathVertex[i] = pathVertex[i] - (i * energy[0].length);
+			int[] pathVertexFinal = new int[pathVertex.length - 2]; 
+			for (int i = 1; i < pathVertex.length - 1; i++) {
+				pathVertexFinal[i - 1] = pathVertex[i] - ((i - 1) * energy[0].length);
 			}
 			
-			Utils.AfficheTableau(pathVertex);
-			
-			return pathVertex;
+			return pathVertexFinal;
 		}
 
 
