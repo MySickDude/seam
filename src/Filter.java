@@ -1,7 +1,7 @@
-
 /**
  * @author Alexia BOGAERT & Sacha KOZMA
  */
+
 public final class Filter {
 
 	/**
@@ -95,7 +95,7 @@ public final class Filter {
 				
 		for (int i = 0; i < gray.length; i++) {
 			for (int j = 0; j < gray[0].length; j++) {
-				sobel[i][j] = (float)(Math.sqrt((sobelX[i][j] * sobelX[i][j]) + (sobelY[i][j]*sobelY[i][j])));
+				sobel[i][j] = (float)(Math.sqrt(Math.pow(sobelX[i][j],2) + Math.pow(sobelY[i][j],2)));
 			}
 		}
 

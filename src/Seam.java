@@ -1,7 +1,9 @@
 import java.util.ArrayList;
+
 /**
  * @author Alexia BOGAERT & Sacha KOZMA
  */
+
 public final class Seam {
 
 	/**

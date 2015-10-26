@@ -1,7 +1,7 @@
-
 /**
  * @author Alexia BOGAERT & Sacha KOZMA
  */
+
 public final class Main {
 
 	public static void main(String[] args) {
@@ -10,9 +10,6 @@ public final class Main {
 		System.out.println("Load image...");
 		int[][] image = Helper.read("tower.jpg");
 		Helper.show(image, "Original");
-		
-		//int[][] image = {{1,1,1,1,1,3,1,1,1,1}}; // Devrait garder 3 ?
-		
 
 		// Convert to grayscale
 		System.out.println("Convert to grayscale...");

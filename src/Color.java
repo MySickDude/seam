@@ -120,7 +120,7 @@ public final class Color {
 		} else if (gray > 1){
 			gray = 1;
 		}
-		int grayInt = (int)(gray*255.0);
+		int grayInt = (int)(gray * 255.0);
 
 		rgb = rgb << 8;
 		rgb += grayInt;
