@@ -63,7 +63,7 @@ public final class Filter {
 		float[][] smooth = {{0.1f, 0.1f, 0.1f},{0.1f, 0.2f, 0.1f}, {0.1f,0.1f,0.1f}};
 		return filter(gray, smooth);
 	}
-
+	
 	/**
 	 * Compute horizontal Sobel filter
 	 * @param gray a HxW float array

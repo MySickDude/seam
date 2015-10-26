@@ -20,15 +20,19 @@ public final class Seam {
 		ArrayList<Integer> pathVertex = new ArrayList<Integer>();
 		int temporaryVertex = to;
 
+		//
 		// Initiatialisation des tableaux
-
+		//
+		
 		for (int i = 0; i < vertexNumber; i++) {
 			distance[i] = Float.POSITIVE_INFINITY;
 			bestPredecessor[i] = null;
 		}
 		
+		//
 		// Algorithme de Dijkstra
-
+		//
+		
 		distance[from] = costs[from];
 
 		while (modified) {
@@ -46,7 +50,9 @@ public final class Seam {
 
 		}
 		
+		//
 		// Parcours en sens inverse pour créer le chemin de from à to (inclus)
+		//
 
 		for (int i = 0; i < to; i--) {
 			
@@ -57,11 +63,11 @@ public final class Seam {
 				return null;
 				
 			} else if (bestPredecessor[temporaryVertex] == from) {
-				pathVertex.add(0, from);
+				pathVertex.add(0, from);	// Ajout dans un tablewau dynamqiue
 				
 				int[] pathVertexInt = new int[pathVertex.size()];
 				
-				for (int j = 0; j < (pathVertexInt.length); j++) {
+				for (int j = 0; j < (pathVertexInt.length); j++) { // "Conversion" en un tableau d'entier
 					pathVertexInt[j] = pathVertex.get(j); 
 				}
 				
@@ -83,32 +89,38 @@ public final class Seam {
 	 * @return a sequence of x-coordinates (the y-coordinate is the index)
 	 */
 	public static int[] find(float[][] energy) {
-		int energySize = energy.length * energy[0].length;
+		int arraySize = energy.length * energy[0].length;
 
 
-		int[][] successors = new int [energySize + 2][];
-		float[] costs = new float [energySize + 2];
-
+		int[][] successors = new int [arraySize + 2][];
+		float[] costs = new float [arraySize + 2];
+		
+		//
 		// Création du pixel "d'entrée"
+		//
 
-		successors[energySize] = new int [energy[0].length]; 
+		successors[arraySize] = new int [energy[0].length]; 
 		for (int i = 0; i < energy[0].length; i++) {
-			successors[energySize][i] = i;
+			successors[arraySize][i] = i;
 		}
-		costs[energySize] = 0;
-
+		costs[arraySize] = 0;
+	
+		//
 		//Création du pixel "de fin"
+		//
 
-		successors[energySize + 1] = new int[] {};
-		costs[energySize + 1] = 0;
+		successors[arraySize + 1] = new int[] {};
+		costs[arraySize + 1] = 0;
 
 		for (int i = 0; i < energy[0].length; i++) {
-			successors[energySize - 1 - i] = new int[] {energySize + 1};
+			successors[arraySize - 1 - i] = new int[] {arraySize + 1};
 
 
 		}
 
+		//
 		// Création des successeurs des pixels restants
+		//
 
 		for (int i = 0; i < (energy.length - 1) ; i++) {
 			for (int j = 0; j < energy[0].length; j++) {
@@ -124,7 +136,9 @@ public final class Seam {
 			}
 		}
 
+		//
 		// Création du tableau costs
+		//
 
 		for (int i = 0; i < energy.length; i++) {
 			for (int j = 0; j < energy[0].length; j++) {
@@ -132,16 +146,17 @@ public final class Seam {
 			}
 		}
 
-		
+		//
 		// Recheche du chemin grâce à path()
+		//
 
 
-		if (path(successors, costs, energySize, energySize + 1) == null) {
+		if (path(successors, costs, arraySize, arraySize + 1) == null) {
 			System.out.println("No seam found...");
 			return null; 
 
 		} else {
-			int[] pathVertex = path(successors, costs, energySize, energySize + 1);
+			int[] pathVertex = path(successors, costs, arraySize, arraySize + 1);
 			
 			int[] pathVertexFinal = new int[pathVertex.length - 2]; 
 			for (int i = 1; i < pathVertex.length - 1; i++) { // Permet de créer un tableau du chemin sans le from et to
