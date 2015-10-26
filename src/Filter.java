@@ -23,6 +23,7 @@ public final class Filter {
 		} else if (col > (gray[0].length - 1)) {
 			col = (gray[0].length - 1);
 		}
+		
 		return gray[row][col];
 	}
 
@@ -38,15 +39,13 @@ public final class Filter {
 		for (int i = 0; i < filtered.length; i++) {
 			for (int j = 0; j < filtered[0].length; j++) {
 
-
+				
 				for (int p = i - (kernel.length / 2), q = 0; q < kernel.length; p++, q++) {
 					for (int r = j - (kernel.length / 2), s = 0; s < kernel[0].length; r++, s++) {
 
 						filtered[i][j] += at(gray,p,r) * kernel[q][s];
-
 					}
 				}
-
 
 			}
 		}
