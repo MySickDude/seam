@@ -1,5 +1,9 @@
 public class Utils {
 
+	/**
+	 * Print array in console
+	 * @param array to be displayed
+	 */
 	public static void displayArray(float[][] tableau) {
 		for (int i = 0; i < tableau.length; i++) {
 			for (int j = 0; j < tableau[i].length; j++) {
@@ -8,11 +12,12 @@ public class Utils {
 			System.out.println();
 
 		}
-
-
-
 	}
 
+	/**
+	 * Print array in console
+	 * @param array to be displayed
+	 */
 	public static void displayArray(int[][] tableau) {
 		for (int i = 0; i < tableau.length; i++) {
 			for (int j = 0; j < tableau[i].length; j++) {
@@ -21,31 +26,31 @@ public class Utils {
 			System.out.println();
 
 		}
-
-
-
 	}
 
+	/**
+	 * Print array in console
+	 * @param array to be displayed
+	 */
 	public static void displayArray(float[] tableau) {
 		for (int j = 0; j < tableau.length; j++) {
 			System.out.println("| " + tableau[j] + " | ");
 
 		}
 
-
-
 	}
 
+	/**
+	 * Print array in console
+	 * @param array to be displayed
+	 */
 	public static void displayArray(int[] tableau) {
 		for (int j = 0; j < tableau.length; j++) {
 			System.out.println("| " + tableau[j] + " | ");
 
 		}
-
-
-
 	}
-	
+
 	/**
 	 * Round value to the limits
 	 * @param max value
