@@ -25,16 +25,16 @@ public final class Seam {
 		//
 		// Initiatialisation des tableaux
 		//
-		
+
 		for (int i = 0; i < vertexNumber; i++) {
 			distance[i] = Float.POSITIVE_INFINITY;
 			bestPredecessor[i] = null;
 		}
-		
+
 		//
 		// Algorithme de Dijkstra
 		//
-		
+
 		distance[from] = costs[from];
 
 		while (modified) {
@@ -51,34 +51,30 @@ public final class Seam {
 
 
 		}
-		
+
 		//
 		// Parcours en sens inverse pour créer le chemin de from à to (inclus)
 		//
 
-		for (int i = 0; i < to; i--) {
-			
+		while(bestPredecessor[temporaryVertex] != null) {
+
 			pathVertex.add(0, temporaryVertex);
 
 
-			if (bestPredecessor[temporaryVertex] == null) {
-				return null;
-				
-			} else if (bestPredecessor[temporaryVertex] == from) {
-				pathVertex.add(0, from);	// Ajout dans un tablewau dynamqiue
-				
+			if (bestPredecessor[temporaryVertex] == from) {
+				pathVertex.add(0, from);	// Ajout dans un tableau dynamqiue
+
 				int[] pathVertexInt = new int[pathVertex.size()];
-				
+
 				for (int j = 0; j < (pathVertexInt.length); j++) { // "Conversion" en un tableau d'entier
 					pathVertexInt[j] = pathVertex.get(j); 
 				}
-				
+
 				return pathVertexInt;
-				
+
 			} else {
 				temporaryVertex = bestPredecessor[temporaryVertex];
 			}
-			
 
 		}
 		
@@ -97,7 +93,7 @@ public final class Seam {
 
 		int[][] successors = new int [listSize + 2][];
 		float[] costs = new float [listSize + 2];
-		
+
 		//
 		// Création du pixel "d'entrée"
 		//
@@ -107,7 +103,7 @@ public final class Seam {
 			successors[listSize][i] = i;
 		}
 		costs[listSize] = 0;
-	
+
 		//
 		//Création du pixel "de fin"
 		//
@@ -160,12 +156,12 @@ public final class Seam {
 
 		} else {
 			int[] pathVertex = path(successors, costs, listSize, listSize + 1);
-			
+
 			int[] pathVertexFinal = new int[pathVertex.length - 2]; 
 			for (int i = 1; i < pathVertex.length - 1; i++) { // Permet de créer un tableau du chemin sans le from et to
 				pathVertexFinal[i - 1] = pathVertex[i] - ((i - 1) * arrayWidth);
 			}
-			
+
 			return pathVertexFinal;
 		}
 
