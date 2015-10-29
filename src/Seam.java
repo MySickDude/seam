@@ -58,11 +58,11 @@ public final class Seam {
 
 		while(bestPredecessor[temporaryVertex] != null) {
 
-			pathVertex.add(0, temporaryVertex);
+			pathVertex.add(0, temporaryVertex); // Ajout dans un tableau dynamqiue
 
 
 			if (bestPredecessor[temporaryVertex] == from) {
-				pathVertex.add(0, from);	// Ajout dans un tableau dynamqiue
+				pathVertex.add(0, from);	
 
 				int[] pathVertexInt = new int[pathVertex.size()];
 
