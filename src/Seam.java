@@ -124,12 +124,12 @@ public final class Seam {
 		for (int i = 0; i < (energy.length - 1) ; i++) {
 			for (int j = 0; j < arrayWidth; j++) {
 
-				if (j == 0) {
+				if (j == 0) { // Si on est sur la première colonne
 					successors[(i * arrayWidth) + j] = new int[] {((i+1) * arrayWidth) + j, ((i+1) * arrayWidth) + j + 1};
-				} else if (j == arrayWidth - 1) {
+				} else if (j == arrayWidth - 1) { // Si on est sur la dernière colonne
 					successors[(i * arrayWidth) + j] = new int[] {((i+1) * arrayWidth) + (j - 1), ((i+1) * arrayWidth) + j};
-				} else { 
-					successors[(i * arrayWidth) + j] = new int[] {((i+1) * arrayWidth) + (j - 1), ((i+1) * arrayWidth) + j,((i+1) * energy[0].length) + j + 1};
+				} else { // Si on est dans les colonnes entre la première est la dernière
+					successors[(i * arrayWidth) + j] = new int[] {((i+1) * arrayWidth) + (j - 1), ((i+1) * arrayWidth) + j,((i+1) * arrayWidth) + (j + 1)};
 				}
 
 			}
@@ -148,17 +148,21 @@ public final class Seam {
 		//
 		// Recheche du chemin grâce à path()
 		//
+		int[] pathVertex = path(successors, costs, listSize, listSize + 1);
 
 
-		if (path(successors, costs, listSize, listSize + 1) == null) {
+		if (pathVertex == null) {
 			System.out.println("No seam found...");
 			return null; 
 
 		} else {
-			int[] pathVertex = path(successors, costs, listSize, listSize + 1);
-
+			//
+			// Permet de créer un tableau du chemin sans le from et to
+			//
+			
 			int[] pathVertexFinal = new int[pathVertex.length - 2]; 
-			for (int i = 1; i < pathVertex.length - 1; i++) { // Permet de créer un tableau du chemin sans le from et to
+			
+			for (int i = 1; i < pathVertex.length - 1; i++) { 
 				pathVertexFinal[i - 1] = pathVertex[i] - ((i - 1) * arrayWidth);
 			}
 
